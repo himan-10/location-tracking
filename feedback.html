@@ -1,0 +1,54 @@
+<!-- feedback.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback | LuxTrack</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-black via-gray-900 to-black text-white min-h-screen font-sans">
+
+  <!-- Header -->
+  <nav class="backdrop-blur-md bg-white/10 border-b border-yellow-500/30 sticky top-0 z-50 p-5 px-10 flex justify-between items-center shadow-2xl">
+    <div class="text-yellow-400 text-3xl font-bold tracking-wider">📍 LuxTrack</div>
+    <ul class="flex gap-8 text-xl">
+      <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
+      <li><a href="tracker.html" class="hover:text-yellow-400">Track Number</a></li>
+      <li><a href="feedback.html" class="text-yellow-400 font-semibold">Feedback</a></li>
+      <li><a href="about.html" class="hover:text-yellow-400">About</a></li>
+      <li><a href="contact.html" class="hover:text-yellow-400">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Feedback Form -->
+  <section class="text-center py-20 px-4">
+    <h1 class="text-5xl font-bold text-yellow-400 mb-6">We Value Your Feedback</h1>
+    <p class="text-gray-400 max-w-2xl mx-auto text-lg mb-10">Help us improve by sharing your experience or ideas.</p>
+
+    <div class="max-w-2xl mx-auto bg-white/5 backdrop-blur-md p-8 rounded-2xl shadow-xl">
+      <form onsubmit="submitFeedback(event)">
+        <input type="text" placeholder="Your Name" required class="w-full mb-4 p-4 rounded-lg text-black text-lg outline-none focus:ring-4 focus:ring-yellow-500" />
+        <input type="email" placeholder="Your Email" required class="w-full mb-4 p-4 rounded-lg text-black text-lg outline-none focus:ring-4 focus:ring-yellow-500" />
+        <textarea placeholder="Write your feedback here..." required rows="5" class="w-full mb-4 p-4 rounded-lg text-black text-lg outline-none focus:ring-4 focus:ring-yellow-500"></textarea>
+        <button type="submit" class="w-full p-4 text-lg font-semibold rounded-lg bg-yellow-400 text-black hover:bg-yellow-500 transition-all duration-300">
+          💬 Submit Feedback
+        </button>
+        <p id="feedback-msg" class="mt-4 text-green-400 hidden">✅ Thank you for your feedback!</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="text-center text-gray-500 py-10 border-t border-gray-800">
+    &copy; 2025 LuxTrack. Designed with feedback in mind.
+  </footer>
+
+  <script>
+    function submitFeedback(event) {
+      event.preventDefault();
+      document.getElementById("feedback-msg").classList.remove("hidden");
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>

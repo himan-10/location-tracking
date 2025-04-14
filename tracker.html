@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phone Number Tracker | LuxTrack</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glow-btn {
+      background: linear-gradient(90deg, gold, orange);
+      box-shadow: 0 0 15px gold;
+      transition: transform 0.3s ease;
+    }
+    .glow-btn:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-black via-gray-900 to-black text-white min-h-screen font-sans">
+
+  <!-- Header -->
+  <nav class="backdrop-blur-md bg-white/10 border-b border-yellow-500/30 sticky top-0 z-50 p-5 px-10 flex justify-between items-center shadow-2xl">
+    <div class="text-yellow-400 text-3xl font-bold tracking-wider">📍 LuxTrack</div>
+    <ul class="flex gap-8 text-xl">
+      <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
+      <li><a href="tracker.html" class="text-yellow-400 font-semibold">Track Number</a></li>
+      <li><a href="feedback.html" class="hover:text-yellow-400">Feedback</a></li>
+      <li><a href="about.html" class="hover:text-yellow-400">About</a></li>
+      <li><a href="contact.html" class="hover:text-yellow-400">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Content -->
+  <section class="text-center py-20 px-4">
+    <h1 class="text-5xl font-bold text-yellow-400 mb-6">Track Phone Number</h1>
+    <p class="text-gray-400 max-w-2xl mx-auto text-lg mb-10">Enter a valid phone number to locate its approximate location. This service is fast, responsive, and secure.</p>
+
+    <!-- Input Form -->
+    <div class="max-w-lg mx-auto bg-white/5 backdrop-blur-md p-8 rounded-2xl shadow-xl">
+      <input id="phoneInput" type="text" placeholder="Enter Phone Number"
+        class="w-full p-4 rounded-lg text-black text-lg mb-4 outline-none focus:ring-4 focus:ring-yellow-500"
+      />
+      <button onclick="trackPhone()" class="w-full p-4 text-lg font-semibold rounded-lg glow-btn">
+        🔍 Track Location
+      </button>
+      <div id="result" class="text-left mt-6 text-lg text-yellow-300"></div>
+    </div>
+  </section>
+
+  <footer class="text-center text-gray-500 py-10 border-t border-gray-800">
+    &copy; 2025 LuxTrack. Designed to impress.
+  </footer>
+
+  <!-- JS Logic -->
+  <script>
+    function trackPhone() {
+      const phone = document.getElementById('phoneInput').value.trim();
+      const resultBox = document.getElementById('result');
+
+      if (!phone.match(/^\+?[0-9]{10,15}$/)) {
+        resultBox.innerHTML = "❌ Please enter a valid phone number (10-15 digits).";
+        return;
+      }
+
+      // Simulate tracking
+      resultBox.innerHTML = "📡 Searching for location...";
+      setTimeout(() => {
+        // Example fake output
+        resultBox.innerHTML = `
+          ✅ Number: <span class="text-white">${phone}</span><br/>
+          🌍 Location: <span class="text-white">New York, USA</span><br/>
+          📶 Carrier: <span class="text-white">AT&T</span><br/>
+          🕒 Timezone: <span class="text-white">GMT-5</span>
+        `;
+      }, 1500);
+    }
+    fetch("https://your-app-name.onrender.com/api/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone })
+      })
+      
+  </script>
+</body>
+</html>
