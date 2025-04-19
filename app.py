@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
 import phonenumbers
 from phonenumbers import geocoder, carrier
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 @app.route("/api/track", methods=["POST"])
 def track_number():
     data = request.get_json()

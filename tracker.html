@@ -51,35 +51,41 @@
     &copy; 2025 LuxTrack. Designed to impress.
   </footer>
 
-  <!-- JS Logic -->
   <script>
-    function trackPhone() {
+    async function trackPhone() {
       const phone = document.getElementById('phoneInput').value.trim();
       const resultBox = document.getElementById('result');
-
+  
       if (!phone.match(/^\+?[0-9]{10,15}$/)) {
-        resultBox.innerHTML = "❌ Please enter a valid phone number (10-15 digits).";
+        resultBox.innerHTML = "❌ Please enter a valid phone number (10–15 digits).";
         return;
       }
-
-      // Simulate tracking
+  
       resultBox.innerHTML = "📡 Searching for location...";
-      setTimeout(() => {
-        // Example fake output
-        resultBox.innerHTML = `
-          ✅ Number: <span class="text-white">${phone}</span><br/>
-          🌍 Location: <span class="text-white">New York, USA</span><br/>
-          📶 Carrier: <span class="text-white">AT&T</span><br/>
-          🕒 Timezone: <span class="text-white">GMT-5</span>
-        `;
-      }, 1500);
+  
+      try {
+        const response = await fetch("http://127.0.0.1:5000/api/track", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone })
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+          resultBox.innerHTML = `
+            ✅ Number: <span class="text-white">${data.number}</span><br/>
+            🌍 Location: <span class="text-white">${data.location || "Unknown"}</span><br/>
+            📶 Carrier: <span class="text-white">${data.carrier || "Unknown"}</span>
+          `;
+        } else {
+          resultBox.innerHTML = `❌ Error: ${data.error || "Something went wrong."}`;
+        }
+      } catch (error) {
+        resultBox.innerHTML = "❌ Failed to connect to the server.";
+      }
     }
-    fetch("https://your-app-name.onrender.com/api/track", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone })
-      })
-      
   </script>
+  
 </body>
 </html>
